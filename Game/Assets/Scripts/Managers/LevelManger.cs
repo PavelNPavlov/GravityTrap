@@ -17,6 +17,7 @@
         void Start()
         {
             this.AtractorObject = GameObject.FindGameObjectWithTag(TagConstants.AtractorTag);
+            
 
             this.atractor = this.AtractorObject.GetComponent<Atractor>();
             Debug.Log("LevelStarted");
@@ -27,10 +28,14 @@
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if (!this.AtractorObject.activeSelf)
+                {
+                    this.AtractorObject.SetActive(true);
+                }
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                target.z = transform.position.z;
+                target.z = 0;
 
-                Debug.Log(target);
+                this.AtractorObject.transform.position = target;
             }
 
             //temp control Scheme
